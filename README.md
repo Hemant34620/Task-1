@@ -12,4 +12,4 @@ Port scanning is a technique used to discover open ports on devices within a net
 
 ## Command Used
 ```bash
-nmap -sS 192.168.1.0/24
+nmap -sS 192.168.2.128
