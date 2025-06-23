@@ -1,0 +1,143 @@
+ pwsh
+PowerShell 7.2.6
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> IP ADDR SHOW
+IP: The term 'IP' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> ip addr show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:a7:29:be brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.128/24 brd 192.168.2.255 scope global dynamic noprefixroute eth0
+       valid_lft 966sec preferred_lft 966sec
+    inet6 fe80::5cfe:cc04:5ad9:9ad5/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> namp -sS 192.168.2.128/24
+namp: The term 'namp' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> nmap -sS 192.168.2.128/24
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-23 11:20 EDT
+Nmap scan report for 192.168.2.1
+Host is up (0.0017s latency).
+All 1000 scanned ports on 192.168.2.1 are in ignored states.
+Not shown: 1000 filtered tcp ports (no-response)
+MAC Address: 00:50:56:C0:00:08 (VMware)                                                                                                                                                                                                    
+                                                                                                                                                                                                                                           
+Nmap scan report for 192.168.2.2                                                                                                                                                                                                           
+Host is up (0.00092s latency).                                                                                                                                                                                                             
+Not shown: 999 closed tcp ports (reset)                                                                                                                                                                                                    
+PORT   STATE SERVICE                                                                                                                                                                                                                       
+53/tcp open  domain                                                                                                                                                                                                                        
+MAC Address: 00:50:56:FF:9A:F2 (VMware)                                                                                                                                                                                                    
+
+Nmap scan report for 192.168.2.254
+Host is up (0.0015s latency).
+All 1000 scanned ports on 192.168.2.254 are in ignored states.
+Not shown: 1000 filtered tcp ports (no-response)
+MAC Address: 00:50:56:F7:20:30 (VMware)
+
+Nmap scan report for 192.168.2.128
+Host is up (0.000013s latency).
+All 1000 scanned ports on 192.168.2.128 are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+
+Nmap done: 256 IP addresses (4 hosts up) scanned in 8.89 seconds
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> sudo nmap -sV -p 53 192.168.2.2                                                                               
+[sudo] password for kali: 
+Sorry, try again.
+[sudo] password for kali: 
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-23 11:22 EDT
+Nmap scan report for 192.168.2.2
+Host is up (0.0011s latency).
+
+PORT   STATE SERVICE VERSION
+53/tcp open  domain  dnsmasq 2.51
+MAC Address: 00:50:56:FF:9A:F2 (VMware)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 7.16 seconds
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> sudo nmap --script vuln -p 53 192.168.2.2                                                                     
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-23 11:24 EDT
+Nmap scan report for 192.168.2.2
+Host is up (0.0029s latency).
+
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: 00:50:56:FF:9A:F2 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 24.80 seconds
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> sudo nmap -sS -p 1-65535 192.168.2.128                                                                        
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-06-23 11:26 EDT
+Nmap scan report for 192.168.2.128
+Host is up (0.0000080s latency).
+All 65535 scanned ports on 192.168.2.128 are in ignored states.
+Not shown: 65535 closed tcp ports (reset)
+
+Nmap done: 1 IP address (1 host up) scanned in 1.97 seconds
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> sudo wireshark                                                                                                
+Warning: program compiled against libxml 212 using older 209
+ ** (wireshark:20897) 11:29:48.730944 [Capture MESSAGE] -- Capture Start ...
+ ** (wireshark:20897) 11:29:48.839318 [Capture MESSAGE] -- Capture started
+ ** (wireshark:20897) 11:29:48.839499 [Capture MESSAGE] -- File: "/tmp/wireshark_eth0UKUF82.pcapng"
+ip a
+^C
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> ip a                                                                                                          
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:a7:29:be brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.128/24 brd 192.168.2.255 scope global dynamic noprefixroute eth0
+       valid_lft 954sec preferred_lft 954sec
+    inet6 fe80::5cfe:cc04:5ad9:9ad5/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+┌──(kali㉿kali)-[/home/kali]
+└─PS> sudo wireshark                                                                                                
+Warning: program compiled against libxml 212 using older 209                                                                                                                                                                                
+ ** (wireshark:24001) 11:36:06.069916 [Capture MESSAGE] -- Capture Start ...                                                                                                                                                                
+ ** (wireshark:24001) 11:36:06.181999 [Capture MESSAGE] -- Error message from child: "Promiscuous mode not supported on the "any" device.", ""                                                                                              
+ ** (wireshark:24001) 11:36:10.196313 [Capture MESSAGE] -- Capture started                                                                                                                                                                  
+ ** (wireshark:24001) 11:36:10.196460 [Capture MESSAGE] -- File: "/tmp/wireshark_anyRZMK82.pcapng"                                                                                                                                          
+ ** (wireshark:24001) 11:36:46.680787 [Capture MESSAGE] -- Capture Stop ...                                                                                                                                                                 
+ ** (wireshark:24001) 11:36:46.745128 [Capture MESSAGE] -- Capture stopped.                                                                                                                                                                 
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[/home/kali]                                                                                                                                                                                                                
+└─PS> sudo wireshark                                                                                                                                                                                                                        
+Warning: program compiled against libxml 212 using older 209
+ ** (wireshark:24752) 11:37:08.549943 [Capture MESSAGE] -- Capture Start ...
+ ** (wireshark:24752) 11:37:08.658346 [Capture MESSAGE] -- Capture started
+ ** (wireshark:24752) 11:37:08.658410 [Capture MESSAGE] -- File: "/tmp/wireshark_eth0DBO872.pcapng"
+ ** (wireshark:24752) 11:40:04.219698 [Capture MESSAGE] -- Capture Stop ...
+ ** (wireshark:24752) 11:40:04.285914 [Capture MESSAGE] -- Capture stopped.
+^C
